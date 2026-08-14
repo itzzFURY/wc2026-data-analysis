@@ -4,23 +4,9 @@ Team project for the Foundation of Data Science assignment, analysing FIFA World
 
 ## What's in here
 
-**Part 1** - 4 analytic tasks, each covering 6 skills (question formulation, data wrangling, sampling, descriptive statistics, confidence interval, two-sample t-test).
+**Part 1** — 4 analytic tasks, each covering 6 skills (question formulation, data wrangling, sampling, descriptive statistics, confidence interval, two-sample t-test).
 
-**Part 2** - 2 linear regression models predicting match outcomes using pre-match data only.
-
-## Repo structure
-
-```
-data/
-  raw/          # untouched data pulled from source sites, don't edit these files
-  processed/    # cleaned tables ready for analysis
-notebooks/      # one notebook per task, see naming convention below
-src/            # shared helper functions (scraping, cleaning) used across notebooks
-reports/        # final write-ups and charts for submission
-requirements.txt
-```
-
-Empty folders contain a `.gitkeep` placeholder file so Git tracks them. It's safe to leave it there once you add real files.
+**Part 2** — 2 linear regression models predicting match outcomes using pre-match data only.
 
 ## Setup
 
@@ -54,37 +40,23 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+
 You'll know the virtual environment is active when you see `(venv)` at the start of your terminal prompt.
 
-## Working on a task
+## Everyday workflow
 
-Create a branch named after your task before making changes, don't commit straight to `main`:
+Everyone works directly on `main`. Pull before you start, push when you're done.
 
 ```
-git checkout -b feature/task1-forward-goals
+git pull
 ```
 
-When your task is ready:
+*(do your work, save your notebook)*
 
 ```
 git add .
-git commit -m "add task1 forward goals analysis"
-git push -u origin feature/task1-forward-goals
-```
-
-Then open a pull request on GitHub into `main` so someone else can glance at it before it's merged.
-
-## Notebook naming convention
-
-Name notebooks after the task they cover, for example:
-
-```
-notebooks/task1_forward_goals.ipynb
-notebooks/task2_passing.ipynb
-notebooks/task3_cards.ipynb
-notebooks/task4_distance.ipynb
-notebooks/regression_goal_diff.ipynb
-notebooks/regression_team_goals.ipynb
+git commit -m "describe what you did"
+git push
 ```
 
 ## Task assignments
