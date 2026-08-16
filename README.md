@@ -4,9 +4,9 @@ Team project for the Foundation of Data Science assignment, analysing FIFA World
 
 ## What's in here
 
-**Part 1** — 4 analytic tasks, each covering 6 skills (question formulation, data wrangling, sampling, descriptive statistics, confidence interval, two-sample t-test).
+**Part 1** - 4 analytic tasks, each covering 6 skills (question formulation, data wrangling, sampling, descriptive statistics, confidence interval, two-sample t-test).
 
-**Part 2** — 2 linear regression models predicting match outcomes using pre-match data only.
+**Part 2** - 2 linear regression models predicting match outcomes using pre-match data only.
 
 ## Setup
 
