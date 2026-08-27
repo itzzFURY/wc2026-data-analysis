@@ -6,8 +6,6 @@ Team project for the Foundation of Data Science assignment, analysing FIFA World
 
 **Part 1** - 4 analytic tasks, each covering 6 skills (question formulation, data wrangling, sampling, descriptive statistics, confidence interval, two-sample t-test).
 
-**Part 2** - 2 linear regression models predicting match outcomes using pre-match data only.
-
 ## Setup
 
 ### Windows (PowerShell)
@@ -40,7 +38,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-
 You'll know the virtual environment is active when you see `(venv)` at the start of your terminal prompt.
 
 ## Everyday workflow
@@ -66,9 +63,8 @@ git push
 | Task 1 | | |
 | Task 2 | | |
 | Task 3 | | |
-| Task 4 | | |
-| Regression 2.1 | Goal difference (104 rows, 8 variables) | |
-| Regression 2.2 | Team goals scored (208 rows, 8 variables) | |
+| Task 4 | Do teams with a faster average top speed score significantly 
+more goals per match than teams with a slower average top speed in the 2026 World Cup? | Vibhi |
 
 ## Data sources
 
