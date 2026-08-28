@@ -1,0 +1,96 @@
+match_id,Round,Date,Home,Away,home_goals,away_goals,first_scorer_team,first_goal_minute,first_goal_min,goal_type,winner,won,half,timing_group
+1,Group stage,11-06-2026,Mexico,South Africa,2,0,Mexico,9',9.0,Goal,Mexico,1,1st,early
+2,Group stage,11-06-2026,Korea Republic,Czechia,2,1,Czechia,59',59.0,Goal - Header,Korea Republic,0,2nd,late
+3,Group stage,12-06-2026,Canada,Bosnia–Herz,1,1,Bosnia-Herzegovina,21',21.0,Goal - Header,Draw,0,1st,early
+4,Group stage,12-06-2026,USA,Paraguay,4,1,United States,7',7.0,Own Goal,USA,0,1st,early
+5,Group stage,13-06-2026,Qatar,Switzerland,1,1,Qatar,90'+4',90.0,Own Goal,Draw,0,2nd,late
+6,Group stage,13-06-2026,Brazil,Morocco,1,1,Morocco,21',21.0,Goal,Draw,0,1st,early
+7,Group stage,13-06-2026,Australia,Türkiye,2,0,Australia,27',27.0,Goal,Australia,1,1st,early
+8,Group stage,13-06-2026,Haiti,Scotland,0,1,Scotland,28',28.0,Goal,Scotland,1,1st,early
+9,Group stage,14-06-2026,Germany,Curaçao,7,1,Germany,6',6.0,Goal,Germany,1,1st,early
+10,Group stage,14-06-2026,Netherlands,Japan,2,2,Netherlands,51',51.0,Goal - Header,Draw,0,2nd,late
+11,Group stage,14-06-2026,Côte d'Ivoire,Ecuador,1,0,Ivory Coast,90',90.0,Goal,Côte d'Ivoire,0,2nd,late
+12,Group stage,14-06-2026,Sweden,Tunisia,5,1,Sweden,7',7.0,Goal,Sweden,1,1st,early
+13,Group stage,15-06-2026,Belgium,Egypt,1,1,Egypt,20',20.0,Goal,Draw,0,1st,early
+14,Group stage,15-06-2026,Saudi Arabia,Uruguay,1,1,Saudi Arabia,41',41.0,Goal,Draw,0,1st,late
+15,Group stage,15-06-2026,IR Iran,New Zealand,2,2,New Zealand,7',7.0,Goal,Draw,0,1st,early
+16,Group stage,16-06-2026,France,Senegal,3,1,France,66',66.0,Goal,France,1,2nd,late
+17,Group stage,16-06-2026,Iraq,Norway,1,4,Norway,29',29.0,Goal,Norway,1,1st,late
+18,Group stage,16-06-2026,Argentina,Algeria,3,0,Argentina,17',17.0,Goal,Argentina,1,1st,early
+19,Group stage,16-06-2026,Austria,Jordan,3,1,Austria,21',21.0,Goal,Austria,1,1st,early
+20,Group stage,17-06-2026,Portugal,Congo DR,1,1,Portugal,6',6.0,Goal - Header,Draw,0,1st,early
+21,Group stage,17-06-2026,England,Croatia,4,2,Croatia,36',36.0,Goal,England,0,1st,late
+22,Group stage,17-06-2026,Ghana,Panama,1,0,Ghana,90'+5',90.0,Goal,Ghana,1,2nd,late
+23,Group stage,17-06-2026,Uzbekistan,Colombia,1,3,Colombia,40',40.0,Goal,Colombia,1,1st,late
+24,Group stage,18-06-2026,Czechia,South Africa,1,1,Czechia,6',6.0,Goal,Draw,0,1st,early
+25,Group stage,18-06-2026,Switzerland,Bosnia–Herz,4,1,Switzerland,74',74.0,Goal,Switzerland,1,2nd,late
+26,Group stage,18-06-2026,Canada,Qatar,6,0,Canada,16',16.0,Goal,Canada,1,1st,early
+27,Group stage,18-06-2026,Mexico,Korea Republic,1,0,Mexico,50',50.0,Goal,Mexico,1,2nd,late
+28,Group stage,19-06-2026,USA,Australia,2,0,United States,11',11.0,Own Goal,USA,0,1st,early
+29,Group stage,19-06-2026,Scotland,Morocco,0,1,Morocco,2',2.0,Goal,Morocco,1,1st,early
+30,Group stage,19-06-2026,Türkiye,Paraguay,0,1,Paraguay,2',2.0,Goal,Paraguay,1,1st,early
+31,Group stage,19-06-2026,Brazil,Haiti,3,0,Brazil,23',23.0,Goal,Brazil,1,1st,early
+32,Group stage,20-06-2026,Netherlands,Sweden,5,1,Netherlands,5',5.0,Goal,Netherlands,1,1st,early
+33,Group stage,20-06-2026,Germany,Côte d'Ivoire,2,1,Ivory Coast,30',30.0,Goal,Germany,0,1st,late
+34,Group stage,20-06-2026,Tunisia,Japan,0,4,Japan,4',4.0,Goal,Japan,1,1st,early
+35,Group stage,21-06-2026,Spain,Saudi Arabia,4,0,Spain,10',10.0,Goal,Spain,1,1st,early
+36,Group stage,21-06-2026,Uruguay,Cabo Verde,2,2,Cape Verde,21',21.0,Goal - Free-kick,Draw,0,1st,early
+37,Group stage,21-06-2026,New Zealand,Egypt,1,3,New Zealand,15',15.0,Goal - Header,Egypt,0,1st,early
+38,Group stage,22-06-2026,Argentina,Austria,2,0,Argentina,38',38.0,Goal,Argentina,1,1st,late
+39,Group stage,22-06-2026,France,Iraq,3,0,France,14',14.0,Goal,France,1,1st,early
+40,Group stage,22-06-2026,Norway,Senegal,3,2,Norway,43',43.0,Goal,Norway,1,1st,late
+41,Group stage,22-06-2026,Jordan,Algeria,1,2,Jordan,36',36.0,Goal,Algeria,0,1st,late
+42,Group stage,23-06-2026,Portugal,Uzbekistan,5,0,Portugal,6',6.0,Goal - Volley,Portugal,1,1st,early
+43,Group stage,23-06-2026,Panama,Croatia,0,1,Croatia,54',54.0,Goal,Croatia,1,2nd,late
+44,Group stage,23-06-2026,Colombia,Congo DR,1,0,Colombia,76',76.0,Goal,Colombia,1,2nd,late
+45,Group stage,24-06-2026,Switzerland,Canada,2,1,Switzerland,46',46.0,Goal,Switzerland,1,2nd,late
+46,Group stage,24-06-2026,Bosnia–Herz,Qatar,3,1,Bosnia-Herzegovina,29',29.0,Goal,Bosnia–Herz,0,1st,late
+47,Group stage,24-06-2026,Scotland,Brazil,0,3,Brazil,7',7.0,Goal,Brazil,1,1st,early
+48,Group stage,24-06-2026,Morocco,Haiti,4,2,Haiti,10',10.0,Own Goal,Morocco,0,1st,early
+49,Group stage,24-06-2026,South Africa,Korea Republic,1,0,South Africa,63',63.0,Goal,South Africa,1,2nd,late
+50,Group stage,24-06-2026,Czechia,Mexico,0,3,Mexico,55',55.0,Goal,Mexico,1,2nd,late
+51,Group stage,25-06-2026,Curaçao,Côte d'Ivoire,0,2,Ivory Coast,7',7.0,Goal,Côte d'Ivoire,0,1st,early
+52,Group stage,25-06-2026,Ecuador,Germany,2,1,Germany,2',2.0,Goal,Ecuador,0,1st,early
+53,Group stage,25-06-2026,Tunisia,Netherlands,1,3,Netherlands,3',3.0,Own Goal,Netherlands,1,1st,early
+54,Group stage,25-06-2026,Japan,Sweden,1,1,Japan,56',56.0,Goal,Draw,0,2nd,late
+55,Group stage,25-06-2026,Türkiye,USA,3,2,United States,3',3.0,Goal,Türkiye,0,1st,early
+56,Group stage,26-06-2026,Norway,France,1,4,France,7',7.0,Goal,France,1,1st,early
+57,Group stage,26-06-2026,Senegal,Iraq,5,0,Senegal,4',4.0,Goal,Senegal,1,1st,early
+58,Group stage,26-06-2026,Uruguay,Spain,0,1,Spain,42',42.0,Goal,Spain,1,1st,late
+59,Group stage,26-06-2026,Egypt,IR Iran,1,1,Egypt,5',5.0,Goal,Draw,0,1st,early
+60,Group stage,26-06-2026,New Zealand,Belgium,1,5,Belgium,28',28.0,Goal,Belgium,1,1st,early
+61,Group stage,27-06-2026,Croatia,Ghana,2,1,Croatia,31',31.0,Goal,Croatia,1,1st,late
+62,Group stage,27-06-2026,Panama,England,0,2,England,62',62.0,Goal,England,1,2nd,late
+63,Group stage,27-06-2026,Congo DR,Uzbekistan,3,1,Uzbekistan,10',10.0,Goal - Volley,Congo DR,0,1st,early
+64,Group stage,27-06-2026,Jordan,Argentina,1,3,Argentina,19',19.0,Goal - Free-kick,Argentina,1,1st,early
+65,Group stage,27-06-2026,Algeria,Austria,3,3,Austria,28',28.0,Goal,Draw,0,1st,early
+66,Round of 32,28-06-2026,South Africa,Canada,0,1,Canada,90'+2',90.0,Goal,Canada,1,2nd,late
+67,Round of 32,29-06-2026,Brazil,Japan,2,1,Japan,29',29.0,Goal,Brazil,0,1st,late
+68,Round of 32,29-06-2026,Germany,Paraguay,1,1,Paraguay,42',42.0,Goal - Header,Draw,0,1st,late
+69,Round of 32,29-06-2026,Netherlands,Morocco,1,1,Netherlands,72',72.0,Goal,Draw,0,2nd,late
+70,Round of 32,30-06-2026,Côte d'Ivoire,Norway,1,2,Norway,39',39.0,Goal,Norway,1,1st,late
+71,Round of 32,30-06-2026,France,Sweden,3,0,France,45',45.0,Goal,France,1,1st,late
+72,Round of 32,30-06-2026,Mexico,Ecuador,2,0,Mexico,22',22.0,Goal,Mexico,1,1st,early
+73,Round of 32,01-07-2026,England,Congo DR,2,1,Congo DR,7',7.0,Goal,England,0,1st,early
+74,Round of 32,01-07-2026,Belgium,Senegal,3,2,Senegal,24',24.0,Goal,Belgium,0,1st,early
+75,Round of 32,01-07-2026,USA,Bosnia–Herz,2,0,United States,45',45.0,Goal,USA,0,1st,late
+76,Round of 32,02-07-2026,Spain,Austria,3,0,Spain,36',36.0,Goal,Spain,1,1st,late
+77,Round of 32,02-07-2026,Portugal,Croatia,2,1,Croatia,53',53.0,Goal,Portugal,0,2nd,late
+78,Round of 32,02-07-2026,Switzerland,Algeria,2,0,Switzerland,10',10.0,Goal,Switzerland,1,1st,early
+79,Round of 32,03-07-2026,Australia,Egypt,1,1,Egypt,13',13.0,Goal - Header,Draw,0,1st,early
+80,Round of 32,03-07-2026,Argentina,Cabo Verde,3,2,Argentina,29',29.0,Goal,Argentina,1,1st,late
+81,Round of 32,03-07-2026,Colombia,Ghana,1,0,Colombia,14',14.0,Goal,Colombia,1,1st,early
+82,Round of 16,04-07-2026,Canada,Morocco,0,3,Morocco,50',50.0,Goal,Morocco,1,2nd,late
+83,Round of 16,04-07-2026,Paraguay,France,0,1,France,70',70.0,Goal - Penalty,France,1,2nd,late
+84,Round of 16,05-07-2026,Brazil,Norway,1,2,Norway,79',79.0,Goal - Header,Norway,1,2nd,late
+85,Round of 16,05-07-2026,Mexico,England,2,3,England,36',36.0,Goal - Header,England,1,1st,late
+86,Round of 16,06-07-2026,Portugal,Spain,0,1,Spain,90'+1',90.0,Goal,Spain,1,2nd,late
+87,Round of 16,06-07-2026,USA,Belgium,1,4,Belgium,9',9.0,Goal,Belgium,1,1st,early
+88,Round of 16,07-07-2026,Argentina,Egypt,3,2,Egypt,15',15.0,Goal - Header,Argentina,0,1st,early
+89,Quarter-finals,09-07-2026,France,Morocco,2,0,France,60',60.0,Goal,France,1,2nd,late
+90,Quarter-finals,10-07-2026,Spain,Belgium,2,1,Spain,30',30.0,Goal,Spain,1,1st,late
+91,Quarter-finals,11-07-2026,Norway,England,1,2,Norway,36',36.0,Goal,England,0,1st,late
+92,Quarter-finals,11-07-2026,Argentina,Switzerland,3,1,Argentina,10',10.0,Goal - Header,Argentina,1,1st,early
+93,Semi-finals,14-07-2026,France,Spain,0,2,Spain,58',58.0,Goal,Spain,1,2nd,late
+94,Semi-finals,15-07-2026,England,Argentina,1,2,England,55',55.0,Goal,Argentina,0,2nd,late
+95,Third-place match,18-07-2026,France,England,4,6,England,3',3.0,Goal,England,1,1st,early
