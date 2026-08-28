@@ -2,17 +2,17 @@
 SKILL 1: QUESTION FORMULATION
 Analytic Question: Among outfield players who played at least 90 minutes at the
 FIFA World Cup 2026, what proportion committed at least one foul, and did
-defenders and forwards differ in their mean number of fouls committed per 90
-minutes?
+defenders and forwards differ significantly in their mean number of fouls committed per 90 minutes?
 
-This file implements the early analysis steps only: loading, inspection,
-cleaning, defining the eligible population, and creating derived features.
+This script performs the data wrangling, sampling, descriptive statistics,
+inferential statistics, and visualisations for this analytic question.
 """
 
 import pandas as pd
 import numpy as np
 import re
 import matplotlib.pyplot as plt
+from scipy import stats
 
 # SKILL 2: DATA WRANGLING (Acquisition, Cleaning, & Feature Construction)
 
@@ -73,15 +73,14 @@ print(df[['player', 'position', 'team', 'nineties_played', 'fouls_committed']].i
 
 
 # 6. Clean the team names
-# FBref sometimes stores teams like "us USA" or "no Norway". Remove short
-# leading/trailing country codes while keeping the full country name.
+# FBref sometimes stores teams like "us USA" or "no Norway". Remove the
+# leading FBref country code while keeping the full country name.
 def clean_team(name):
     if pd.isna(name):
         return name
     s = str(name).strip()
-    # remove leading or trailing 2-3 letter country codes (like 'us ', ' mx', case-insensitive)
+    # remove leading 2-3 letter country codes (like 'us ', case-insensitive)
     s = re.sub(r'^[A-Za-z]{2,3}\s+', '', s)
-    s = re.sub(r'\s+[A-Za-z]{2,3}$', '', s)
     return s.strip()
 
 # work on a cleaned copy so the original selection remains available
@@ -161,7 +160,7 @@ if len(df_raw) != 1039 or eligible_size != 685:
     print('Do not force counts. Check for differences in the raw file (missing rows,')
     print('column name mismatches, or unexpected data formats).')
 
-print('\nScript complete: data loading, cleaning, population definition, and features are ready.')
+print('\nData wrangling complete: eligible population and features are ready.')
 
 # SKILL 3: SAMPLING
 # Take a simple random sample of 250 players from the eligible population.
@@ -222,11 +221,6 @@ print('\nDifference in means (defender mean - forward mean):', mean_def - mean_f
 
 # SKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST
 # PART 1: 95% CONFIDENCE INTERVAL FOR THE PROPORTION (using the sample)
-from math import sqrt
-try:
-    from scipy import stats
-except Exception:
-    stats = None
 
 print('\nSKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST')
 n = len(sample)
@@ -238,7 +232,7 @@ print(' p_hat:', p_hat)
 print(' n * p_hat:', n * p_hat)
 print(' n * (1 - p_hat):', n * (1 - p_hat))
 
-standard_error = sqrt(p_hat * (1 - p_hat) / n)
+standard_error = np.sqrt(p_hat * (1 - p_hat) / n)
 z_critical = 1.96
 lower_ci = p_hat - z_critical * standard_error
 upper_ci = p_hat + z_critical * standard_error
@@ -261,21 +255,18 @@ print(' defender sample mean:', mean_def_sample)
 print(' forward sample mean:', mean_fwd_sample)
 print(' difference in sample means (def - fwd):', mean_def_sample - mean_fwd_sample)
 
-if stats is None:
-    print('\nscipy.stats is not available; cannot run t-test')
+t_res = stats.ttest_ind(defenders, forwards, equal_var=False)
+t_stat = float(t_res.statistic)
+p_value = float(t_res.pvalue)
+print(' t-statistic:', t_stat)
+print(' p-value:', p_value)
+print(' alpha:', alpha)
+if p_value < alpha:
+    print(' Decision: reject H0 because p-value < 0.05')
+    print(' Conclusion: There is sufficient evidence at the 5% significance level to conclude that defenders and forwards differ in their population mean fouls per 90.')
 else:
-    t_res = stats.ttest_ind(defenders, forwards, equal_var=False)
-    t_stat = float(t_res.statistic)
-    p_value = float(t_res.pvalue)
-    print(' t-statistic:', t_stat)
-    print(' p-value:', p_value)
-    print(' alpha:', alpha)
-    if p_value < alpha:
-        print(' Decision: reject H0 (evidence of a difference in means at alpha=0.05)')
-        print(' Conclusion: In this sample, defenders and forwards show different mean fouls per 90.')
-    else:
-        print(' Decision: do not reject H0 (no evidence of a difference in means at alpha=0.05)')
-        print(' Conclusion: In this sample, we do not find evidence that defenders and forwards differ in mean fouls per 90.')
+    print(' Decision: do not reject H0 because p-value > 0.05')
+    print(' Conclusion: There is insufficient evidence at the 5% significance level to conclude that defenders and forwards differ in their population mean fouls per 90.')
 
 
 # VISUALISATIONS
