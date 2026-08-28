@@ -218,3 +218,62 @@ mean_def = defenders.mean() if len(defenders) > 0 else float('nan')
 mean_fwd = forwards.mean() if len(forwards) > 0 else float('nan')
 print('\nDifference in means (defender mean - forward mean):', mean_def - mean_fwd)
 
+
+# SKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST
+# PART 1: 95% CONFIDENCE INTERVAL FOR THE PROPORTION (using the sample)
+from math import sqrt
+try:
+    from scipy import stats
+except Exception:
+    stats = None
+
+print('\nSKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST')
+n = len(sample)
+# p_hat already computed above from the sample
+print('\nProportion 95% CI (sample-based)')
+print(' sample size n:', n)
+print(' p_hat:', p_hat)
+# success/failure check
+print(' n * p_hat:', n * p_hat)
+print(' n * (1 - p_hat):', n * (1 - p_hat))
+
+standard_error = sqrt(p_hat * (1 - p_hat) / n)
+z_critical = 1.96
+lower_ci = p_hat - z_critical * standard_error
+upper_ci = p_hat + z_critical * standard_error
+print(' standard error:', standard_error)
+print(' 95% CI (proportions):', (lower_ci, upper_ci))
+print(' 95% CI (percent):', (f"{lower_ci*100:.2f}%", f"{upper_ci*100:.2f}%"))
+
+
+# PART 2: TWO-SAMPLE WELCH T-TEST (defenders vs forwards)
+# Hypotheses:
+# H0: mu_DF = mu_FW
+# Ha: mu_DF != mu_FW
+# Two-sided test, alpha = 0.05
+alpha = 0.05
+print('\nWelch two-sample t-test (defenders vs forwards)')
+print('Using exact DF and exact FW from the sample only')
+mean_def_sample = mean_def
+mean_fwd_sample = mean_fwd
+print(' defender sample mean:', mean_def_sample)
+print(' forward sample mean:', mean_fwd_sample)
+print(' difference in sample means (def - fwd):', mean_def_sample - mean_fwd_sample)
+
+if stats is None:
+    print('\nscipy.stats is not available; cannot run t-test')
+else:
+    t_res = stats.ttest_ind(defenders, forwards, equal_var=False)
+    t_stat = float(t_res.statistic)
+    p_value = float(t_res.pvalue)
+    print(' t-statistic:', t_stat)
+    print(' p-value:', p_value)
+    print(' alpha:', alpha)
+    if p_value < alpha:
+        print(' Decision: reject H0 (evidence of a difference in means at alpha=0.05)')
+        print(' Conclusion: In this sample, defenders and forwards show different mean fouls per 90.')
+    else:
+        print(' Decision: do not reject H0 (no evidence of a difference in means at alpha=0.05)')
+        print(' Conclusion: In this sample, we do not find evidence that defenders and forwards differ in mean fouls per 90.')
+
+
