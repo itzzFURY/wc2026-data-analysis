@@ -161,3 +161,60 @@ if len(df_raw) != 1039 or eligible_size != 685:
     print('column name mismatches, or unexpected data formats).')
 
 print('\nScript complete: data loading, cleaning, population definition, and features are ready.')
+
+# SKILL 3: SAMPLING
+# Take a simple random sample of 250 players from the eligible population.
+# We randomly select 250 players out of the 685 eligible players.
+# Setting `random_state=42` makes the sample reproducible so the same
+# players are selected every time the code runs.
+sample = df_eligible.sample(n=250, random_state=42)
+
+print('\nSKILL 3: SAMPLING')
+print('Sample size:', len(sample))
+print('\nSample position frequency table:')
+print(sample['position'].value_counts(dropna=False))
+print('\nNumber of exact DF players in sample:', int((sample['position'] == 'DF').sum()))
+print('Number of exact FW players in sample:', int((sample['position'] == 'FW').sum()))
+
+
+# SKILL 4: DESCRIPTIVE STATISTICS
+# Use the sample to estimate the proportion who committed at least one foul
+# and to descriptively compare defenders and forwards on fouls per 90.
+print('\nSKILL 4: DESCRIPTIVE STATISTICS')
+# 4. Proportion calculations (sample only)
+num_committed_sample = int(sample['committed_foul'].sum())
+num_zero_sample = int((sample['committed_foul'] == 0).sum())
+p_hat = num_committed_sample / len(sample)
+print('\nProportion analysis (sample of 250):')
+print('Number who committed at least one foul:', num_committed_sample)
+print('Number who committed zero fouls:', num_zero_sample)
+print('Sample proportion (p_hat):', p_hat)
+print('Sample percentage who committed at least one foul:', f"{p_hat*100:.2f}%")
+
+
+# 5-7. Defender vs Forward descriptive comparison (exact DF and exact FW only)
+defenders = sample[sample['position'] == 'DF']['fouls_per_90'].dropna()
+forwards = sample[sample['position'] == 'FW']['fouls_per_90'].dropna()
+
+def print_stats(name, series):
+    n = len(series)
+    mean = series.mean() if n > 0 else float('nan')
+    median = series.median() if n > 0 else float('nan')
+    std = series.std(ddof=1) if n > 1 else float('nan')
+    mn = series.min() if n > 0 else float('nan')
+    mx = series.max() if n > 0 else float('nan')
+    print(f"\n{name} (n={n})")
+    print(' mean fouls_per_90:', mean)
+    print(' median fouls_per_90:', median)
+    print(' std (sample):', std)
+    print(' min:', mn)
+    print(' max:', mx)
+
+print('\nDefender vs Forward descriptive statistics (sample)')
+print_stats('Defenders (DF)', defenders)
+print_stats('Forwards (FW)', forwards)
+
+mean_def = defenders.mean() if len(defenders) > 0 else float('nan')
+mean_fwd = forwards.mean() if len(forwards) > 0 else float('nan')
+print('\nDifference in means (defender mean - forward mean):', mean_def - mean_fwd)
+
