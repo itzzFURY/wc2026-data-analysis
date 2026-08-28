@@ -12,6 +12,7 @@ cleaning, defining the eligible population, and creating derived features.
 import pandas as pd
 import numpy as np
 import re
+import matplotlib.pyplot as plt
 
 # SKILL 2: DATA WRANGLING (Acquisition, Cleaning, & Feature Construction)
 
@@ -275,5 +276,52 @@ else:
     else:
         print(' Decision: do not reject H0 (no evidence of a difference in means at alpha=0.05)')
         print(' Conclusion: In this sample, we do not find evidence that defenders and forwards differ in mean fouls per 90.')
+
+
+# VISUALISATIONS
+# Create and save two matplotlib figures into the task_fouls folder.
+
+# PLOT 1: FOUL PROPORTION (from the existing `sample` DataFrame)
+# Plot percentages (not raw counts) calculated from the sample.
+counts_at_least_one = int((sample['committed_foul'] == 1).sum())
+counts_zero = int((sample['committed_foul'] == 0).sum())
+labels = ["At least one foul", "Zero fouls"]
+# percentages from sample
+percent_at_least_one = counts_at_least_one / len(sample) * 100
+percent_zero = counts_zero / len(sample) * 100
+percents = [percent_at_least_one, percent_zero]
+
+plt.figure(figsize=(6,4))
+bars = plt.bar(labels, percents)
+plt.title('Foul Commitment Among Sampled Outfield Players')
+plt.ylabel('Percentage of Players (%)')
+# annotate percentages with one decimal place
+for bar, pct in zip(bars, percents):
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2, height + 1.0, f"{pct:.1f}%", ha='center', va='bottom')
+plt.tight_layout()
+plt.savefig('task_fouls/foul_proportion.png')
+plt.close()
+
+
+# PLOT 2: DEFENDERS VS FORWARDS (boxplot using existing `defenders` and `forwards` Series)
+plt.figure(figsize=(6,5))
+data = [defenders, forwards]
+plt.boxplot(data)
+plt.xticks([1, 2], ['Defenders', 'Forwards'])
+plt.title('Distribution of Fouls per 90: Defenders vs Forwards')
+plt.ylabel('Fouls per 90 Minutes')
+# add sample means as visible markers on the plot (do not hard-code values)
+mean_def_val = defenders.mean()
+mean_fwd_val = forwards.mean()
+plt.scatter([1], [mean_def_val], color='red', marker='D', s=60, zorder=5)
+plt.scatter([2], [mean_fwd_val], color='red', marker='D', s=60, zorder=5)
+# create a legend entry using a proxy artist matching the diamond marker
+from matplotlib.lines import Line2D
+proxy = Line2D([0], [0], marker='D', color='w', markerfacecolor='red', markersize=8)
+plt.legend([proxy], ['Sample mean'], loc='upper right')
+plt.tight_layout()
+plt.savefig('task_fouls/defender_forward_fouls.png')
+plt.close()
 
 
