@@ -2,10 +2,11 @@
 # FIFA World Cup 2026
 
 # Analytic question:
-# Among outfield players who played at least 90 minutes at the
-# FIFA World Cup 2026, what was the mean number of interceptions
-# per 90 minutes, and did defenders and midfielders differ
-# significantly in their mean interceptions per 90 minutes?
+"""Among outfield players who played at least 90 minutes at the FIFA World Cup 2026, what was the mean number of interceptions per 90 minutes, and did defenders and midfielders differ significantly in their mean interceptions per 90 minutes?"""
+
+# Data source:
+# FBref - 2026 FIFA World Cup Player Miscellaneous Stats
+# https://fbref.com/en/comps/1/misc/World-Cup-Stats
 
 
 import pandas as pd
@@ -257,8 +258,7 @@ print("Maximum:", round(sample_max, 3))
 # TASK 6: HISTOGRAM
 # ============================================================
 
-# Create a histogram to examine the distribution
-# of interceptions per 90 minutes
+# Create a histogram to examine the distribution of interceptions per 90 minutes
 
 plt.figure(figsize=(8, 5))
 
@@ -415,14 +415,12 @@ plt.suptitle("")
 plt.tight_layout()
 
 
-# Save the graph
 plt.savefig(
     "Task Interceptions/defender_midfielder_interceptions.png",
     dpi=300
 )
 
 
-# Display the graph
 plt.show()
 
 
@@ -494,7 +492,7 @@ else:
         "in their mean interceptions per 90 minutes."
     )
 
-    # ============================================================
+# ============================================================
 # TASK 11: FINAL SUMMARY
 # ============================================================
 
