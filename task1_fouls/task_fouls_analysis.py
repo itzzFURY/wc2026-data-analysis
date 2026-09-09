@@ -1,8 +1,7 @@
 """
 SKILL 1: QUESTION FORMULATION
-Analytic Question: Among outfield players who played at least 90 minutes at the
-FIFA World Cup 2026, what proportion committed at least one foul, and did
-defenders and forwards differ significantly in their mean number of fouls committed per 90 minutes?
+Analytic Question: What proportion of eligible outfield players committed at least one foul,
+ and did defenders and forwards differ significantly in mean fouls per 90 minutes at the 2026 World Cup?
 
 This script performs the data wrangling, sampling, descriptive statistics,
 inferential statistics, and visualisations for this analytic question.
