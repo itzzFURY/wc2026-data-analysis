@@ -1,10 +1,8 @@
 """
-SKILL 1: QUESTION FORMULATION
-Analytic Question: What proportion of eligible outfield players committed at least one foul,
- and did defenders and forwards differ significantly in mean fouls per 90 minutes at the 2026 World Cup?
+SKILL 1: ANALYSIS
+Question I asked and tried to answer for this task: What proportion of eligible outfield players committed at least one foul,
+and did defenders and forwards differ significantly in mean fouls per 90 minutes at the 2026 World Cup?
 
-This script performs the data wrangling, sampling, descriptive statistics,
-inferential statistics, and visualisations for this analytic question.
 """
 
 import pandas as pd
@@ -13,11 +11,10 @@ import re
 import matplotlib.pyplot as plt
 from scipy import stats
 
-# SKILL 2: DATA WRANGLING (Acquisition, Cleaning, & Feature Construction)
+# SKILL 2: DATA WRANGLING
 
-# 1. Load the raw FBref player dataset
-# The raw CSV is left unchanged; all cleaning and checks happen in Python.
-# 2. Inspect the raw data briefly so we know what we have before modifying it.
+# Load the raw FBref player dataset. The raw CSV is not edited directly.
+# Inspect the raw dataset before cleaning.
 
 RAW_PATH = 'task_fouls/fifa2026_player_misc_raw.csv'  # relative to repo root
 
@@ -37,10 +34,8 @@ print(df_raw.isna().sum())
 print('\nDuplicate rows count: ', df_raw.duplicated().sum())
 
 
-# 3. Select the variables needed for this analysis
-# Keep only player name, position, team, 90s (playing time) and fouls.
-
-# 4. Rename columns to simpler names for the rest of the script.
+# Keep only the variables needed for the fouls analysis.
+# Rename them to simpler names for the rest of the script.
 cols_keep = ['Player', 'Pos', 'Squad', '90s', 'Fls']
 missing_cols = [c for c in cols_keep if c not in df_raw.columns]
 if missing_cols:
@@ -61,9 +56,8 @@ print('\nDtypes before numeric conversion:')
 print(df.dtypes)
 
 
-# 5. Convert numerical columns
-# Turn `nineties_played` and `fouls_committed` into numeric types. Any values
-# that can't be parsed become NaN so we don't guess or invent data.
+# Convert playing time and fouls to numeric values.
+# Unreadable values become missing rather than being guessed.
 df['nineties_played'] = pd.to_numeric(df['nineties_played'], errors='coerce')
 df['fouls_committed'] = pd.to_numeric(df['fouls_committed'], errors='coerce')
 
@@ -71,18 +65,15 @@ print('\nMissing values in selected columns (after numeric coercion):')
 print(df[['player', 'position', 'team', 'nineties_played', 'fouls_committed']].isna().sum())
 
 
-# 6. Clean the team names
-# FBref sometimes stores teams like "us USA" or "no Norway". Remove the
-# leading FBref country code while keeping the full country name.
+# Clean the FBref team names by removing leading country codes.
 def clean_team(name):
     if pd.isna(name):
         return name
     s = str(name).strip()
-    # remove leading 2-3 letter country codes (like 'us ', case-insensitive)
     s = re.sub(r'^[A-Za-z]{2,3}\s+', '', s)
     return s.strip()
 
-# work on a cleaned copy so the original selection remains available
+# Work on a cleaned copy so the original selection remains available.
 df_clean = df.copy()
 df_clean['team'] = df_clean['team'].apply(clean_team)
 
@@ -90,9 +81,8 @@ print('\nSample cleaned team values:')
 print(df_clean['team'].dropna().unique()[:20])
 
 
-# 7. Check for missing required fields
-# We must identify rows missing `position`, `nineties_played`, or
-# `fouls_committed` before we filter the population. We report examples below.
+# Check missing values in the fields needed for the analysis.
+# Report missing fields before filtering the eligible population.
 required = ['position', 'nineties_played', 'fouls_committed']
 missing_required_mask = df_clean[required].isna().any(axis=1)
 missing_required_count = missing_required_mask.sum()
@@ -102,18 +92,15 @@ if missing_required_count > 0:
     print(df_clean[missing_required_mask].head(5))
 
 
-# 8. Define the eligible population
-# Eligibility: outfield players (exclude exact 'GK') who have >= 1.0 in `90s`.
-# We count players with >=1.0 90s before removing goalkeepers for transparency.
+# Define the eligible population.
+# Keep outfield players with at least 90 minutes played.
+# The 90-minute rule avoids comparisons based on very little playing time.
 players_with_1plus_90s = df_clean[df_clean['nineties_played'] >= 1.0].shape[0]
 
-# Remove rows with missing required fields (reported above)
 df_eligible = df_clean.dropna(subset=required).copy()
 
-# Exclude goalkeepers (exact match 'GK')
 df_eligible = df_eligible[df_eligible['position'] != 'GK'].copy()
 
-# Then require at least 1.0 nineties
 df_eligible = df_eligible[df_eligible['nineties_played'] >= 1.0].copy()
 
 print('\n-- POPULATION COUNTS & FREQUENCIES --')
@@ -124,19 +111,16 @@ print('\nFrequency table of positions (eligible population):')
 print(df_eligible['position'].value_counts(dropna=False))
 
 
-# 9. Feature construction
-# `committed_foul` flags whether a player committed at least one foul (1/0).
-# `fouls_per_90` standardises fouls by playing time so players are comparable.
+# Create the variables used in the analysis.
+# committed_foul shows whether a player committed at least one foul.
+# fouls_per_90 adjusts the number of fouls for playing time.
 df_eligible['committed_foul'] = np.where(df_eligible['fouls_committed'] > 0, 1,
                                          np.where(df_eligible['fouls_committed'] == 0, 0, np.nan))
 
-# fouls_per_90: fouls_committed divided by nineties_played
 df_eligible['fouls_per_90'] = df_eligible['fouls_committed'] / df_eligible['nineties_played']
 
 
-# 10. Validation and output
-# Print the first 10 cleaned rows and a few counts so you can verify the
-# filtering and new variables before any statistical analysis.
+# Validate the eligible population and constructed variables before analysis.
 cols_out = ['player', 'position', 'team', 'nineties_played', 'fouls_committed', 'committed_foul', 'fouls_per_90']
 print('\nFirst 10 rows of the cleaned eligible population:')
 print(df_eligible[cols_out].head(10).to_string(index=False))
@@ -162,10 +146,8 @@ if len(df_raw) != 1039 or eligible_size != 685:
 print('\nData wrangling complete: eligible population and features are ready.')
 
 # SKILL 3: SAMPLING
-# Take a simple random sample of 250 players from the eligible population.
-# We randomly select 250 players out of the 685 eligible players.
-# Setting `random_state=42` makes the sample reproducible so the same
-# players are selected every time the code runs.
+# Take a simple random sample of 250 eligible players.
+# random_state=42 makes the sample reproducible.
 sample = df_eligible.sample(n=250, random_state=42)
 
 print('\nSKILL 3: SAMPLING')
@@ -177,10 +159,8 @@ print('Number of exact FW players in sample:', int((sample['position'] == 'FW').
 
 
 # SKILL 4: DESCRIPTIVE STATISTICS
-# Use the sample to estimate the proportion who committed at least one foul
-# and to descriptively compare defenders and forwards on fouls per 90.
+# Calculate the sample proportion who committed at least one foul.
 print('\nSKILL 4: DESCRIPTIVE STATISTICS')
-# 4. Proportion calculations (sample only)
 num_committed_sample = int(sample['committed_foul'].sum())
 num_zero_sample = int((sample['committed_foul'] == 0).sum())
 p_hat = num_committed_sample / len(sample)
@@ -191,7 +171,7 @@ print('Sample proportion (p_hat):', p_hat)
 print('Sample percentage who committed at least one foul:', f"{p_hat*100:.2f}%")
 
 
-# 5-7. Defender vs Forward descriptive comparison (exact DF and exact FW only)
+# Use exact defenders and forwards for the position comparison.
 defenders = sample[sample['position'] == 'DF']['fouls_per_90'].dropna()
 forwards = sample[sample['position'] == 'FW']['fouls_per_90'].dropna()
 
@@ -209,6 +189,7 @@ def print_stats(name, series):
     print(' min:', mn)
     print(' max:', mx)
 
+# Calculate descriptive statistics for both groups.
 print('\nDefender vs Forward descriptive statistics (sample)')
 print_stats('Defenders (DF)', defenders)
 print_stats('Forwards (FW)', forwards)
@@ -219,15 +200,14 @@ print('\nDifference in means (defender mean - forward mean):', mean_def - mean_f
 
 
 # SKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST
-# PART 1: 95% CONFIDENCE INTERVAL FOR THE PROPORTION (using the sample)
+# Calculate the 95% confidence interval for the population proportion.
 
 print('\nSKILL 5 & 6: CONFIDENCE INTERVAL & TWO-SAMPLE T-TEST')
 n = len(sample)
-# p_hat already computed above from the sample
 print('\nProportion 95% CI (sample-based)')
 print(' sample size n:', n)
 print(' p_hat:', p_hat)
-# success/failure check
+# Check the success/failure condition for the proportion confidence interval.
 print(' n * p_hat:', n * p_hat)
 print(' n * (1 - p_hat):', n * (1 - p_hat))
 
@@ -240,11 +220,10 @@ print(' 95% CI (proportions):', (lower_ci, upper_ci))
 print(' 95% CI (percent):', (f"{lower_ci*100:.2f}%", f"{upper_ci*100:.2f}%"))
 
 
-# PART 2: TWO-SAMPLE WELCH T-TEST (defenders vs forwards)
 # Hypotheses:
 # H0: mu_DF = mu_FW
 # Ha: mu_DF != mu_FW
-# Two-sided test, alpha = 0.05
+# Use a two-sided Welch t-test with alpha = 0.05.
 alpha = 0.05
 print('\nWelch two-sample t-test (defenders vs forwards)')
 print('Using exact DF and exact FW from the sample only')
@@ -269,14 +248,10 @@ else:
 
 
 # VISUALISATIONS
-# Create and save two matplotlib figures into the task_fouls folder.
-
-# PLOT 1: FOUL PROPORTION (from the existing `sample` DataFrame)
-# Plot percentages (not raw counts) calculated from the sample.
+# Plot the percentage of sampled players who committed at least one foul.
 counts_at_least_one = int((sample['committed_foul'] == 1).sum())
 counts_zero = int((sample['committed_foul'] == 0).sum())
 labels = ["At least one foul", "Zero fouls"]
-# percentages from sample
 percent_at_least_one = counts_at_least_one / len(sample) * 100
 percent_zero = counts_zero / len(sample) * 100
 percents = [percent_at_least_one, percent_zero]
@@ -285,7 +260,7 @@ plt.figure(figsize=(6,4))
 bars = plt.bar(labels, percents)
 plt.title('Foul Commitment Among Sampled Outfield Players')
 plt.ylabel('Percentage of Players (%)')
-# annotate percentages with one decimal place
+# Label each bar with its percentage.
 for bar, pct in zip(bars, percents):
     height = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2, height + 1.0, f"{pct:.1f}%", ha='center', va='bottom')
@@ -294,19 +269,19 @@ plt.savefig('task_fouls/foul_proportion.png')
 plt.close()
 
 
-# PLOT 2: DEFENDERS VS FORWARDS (boxplot using existing `defenders` and `forwards` Series)
+# Compare the distribution of fouls per 90 for defenders and forwards.
 plt.figure(figsize=(6,5))
 data = [defenders, forwards]
 plt.boxplot(data)
 plt.xticks([1, 2], ['Defenders', 'Forwards'])
 plt.title('Distribution of Fouls per 90: Defenders vs Forwards')
 plt.ylabel('Fouls per 90 Minutes')
-# add sample means as visible markers on the plot (do not hard-code values)
+# The diamond markers represent the sample means.
 mean_def_val = defenders.mean()
 mean_fwd_val = forwards.mean()
 plt.scatter([1], [mean_def_val], color='red', marker='D', s=60, zorder=5)
 plt.scatter([2], [mean_fwd_val], color='red', marker='D', s=60, zorder=5)
-# create a legend entry using a proxy artist matching the diamond marker
+# Add a legend entry for the sample mean marker.
 from matplotlib.lines import Line2D
 proxy = Line2D([0], [0], marker='D', color='w', markerfacecolor='red', markersize=8)
 plt.legend([proxy], ['Sample mean'], loc='upper right')
