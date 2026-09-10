@@ -50,6 +50,9 @@ master_df = team_stats.join(
 median_speed = master_df['Avg_Team_Top_Speed'].median()
 master_df['Speed_Category'] = np.where(master_df['Avg_Team_Top_Speed'] > median_speed, 'Faster', 'Slower')
 
+# Print the median speed of the tournament
+print("Tournament Median Speed: %.2f" % median_speed)
+
 faster_goals = master_df[master_df['Speed_Category'] == 'Faster']['Total_Goals'].to_numpy()
 slower_goals = master_df[master_df['Speed_Category'] == 'Slower']['Total_Goals'].to_numpy()
 
